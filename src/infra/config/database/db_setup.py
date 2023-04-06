@@ -1,4 +1,5 @@
 # flake8: noqa: F401
+from src.infra.entities import Customer, Dish, DishOrder, Menu, Order
 
 from .db_base import Base
 from .db_config import DBConnectionHandler
