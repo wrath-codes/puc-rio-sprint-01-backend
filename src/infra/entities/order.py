@@ -12,6 +12,7 @@ class Order(Base):
     date = Column(DateTime(timezone=True), nullable=False)
 
     dishes = relationship("Dish", secondary="dish_order", back_populates="orders")
+    dishes = relationship("Dish", secondary="dish_order", back_populates="orders")
     customer = relationship("Customer", back_populates="orders")
 
     def __repr__(self):

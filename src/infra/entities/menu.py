@@ -9,6 +9,7 @@ class Menu(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     date = Column(DateTime(timezone=True), nullable=False)
+    date = Column(DateTime)
 
     dishes = relationship("Dish", back_populates="menu")
 
