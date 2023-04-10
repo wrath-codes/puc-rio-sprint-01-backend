@@ -90,7 +90,7 @@ class DishesRepository:
     @classmethod
     def update_dish(
         cls,
-        dish_id: int = None,
+        dish_id: int,
         dish_name: str = None,
         dish_description: str = None,
         dish_price: int = None,

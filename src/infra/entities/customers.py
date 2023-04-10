@@ -1,4 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from src.infra.config.database import Base
 
@@ -12,17 +13,16 @@ class Customers(Base):
     name = Column(String)
     phone = Column(String)
 
-    tab_id = Column(Integer, ForeignKey("tabs.id"))
+    tabs = relationship("Tabs")
 
     def __repr__(self):
-        return f"Customer(id={self.id}, name={self.name}, email={self.email})"
+        return f"Customer(name={self.name}"
 
     def __eq__(self, other):
         if (
             self.id == other.id
             and self.name == other.name
-            and self.email == other.email
-            and self.password == other.password
+            and self.phone == other.phone
         ):
             return True
         return False

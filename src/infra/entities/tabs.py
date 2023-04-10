@@ -1,7 +1,14 @@
-from sqlalchemy import Column, ForeignKey, Integer
+import enum
+
+from sqlalchemy import Column, Enum, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from src.infra.config.database import Base
+
+
+class StatusTab(enum.Enum):
+    OPEN = "open"
+    CLOSED = "closed"
 
 
 class Tabs(Base):
@@ -10,6 +17,7 @@ class Tabs(Base):
     __tablename__ = "tabs"
 
     id = Column(Integer, primary_key=True, index=True)
+    status = Column(Enum(StatusTab))
     customer_id = Column(Integer, ForeignKey("customers.id"))
     orders = relationship("Orders")
 
