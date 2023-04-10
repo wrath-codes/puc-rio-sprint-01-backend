@@ -1,1 +1,1 @@
-from .dish import Dish
+from .dishes import Dishes

@@ -11,8 +11,7 @@ class Orders(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     customer_id = Column(Integer, ForeignKey("customers.id"))
-    customer = relationship("Customers", back_populates="orders")
-    dishes = relationship("DishOrders", back_populates="order")
+
     tab_id = Column(Integer, ForeignKey("tabs.id"))
     tab = relationship("Tabs", back_populates="orders")
 
