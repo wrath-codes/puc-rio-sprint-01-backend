@@ -7,8 +7,8 @@ from src.infra.config.database import Base
 
 
 class StatusTab(enum.Enum):
-    OPEN = "open"
-    CLOSED = "closed"
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
 
 
 class Tabs(Base):
@@ -22,13 +22,13 @@ class Tabs(Base):
     orders = relationship("Orders")
 
     def __repr__(self):
-        return f"Tab(id={self.id}, customer_id={self.customer_id})"
+        return f"Tab(customer_id={self.customer_id}, status={self.status})"
 
     def __eq__(self, other):
         if (
             self.id == other.id
+            and self.status == other.status
             and self.customer_id == other.customer_id
-            and self.dishes == other.dishes
         ):
             return True
         return False
