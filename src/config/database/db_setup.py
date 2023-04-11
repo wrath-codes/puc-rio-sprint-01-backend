@@ -1,4 +1,5 @@
 # flake8: noqa: F401
+from src.models import Ingredient, Recipe, Step
 
 from .db_base import Base
 from .db_config import DBConnectionHandler
