@@ -1,23 +1,23 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
-class StepSchema(BaseModel):
-    """Define como um novo passo inserido deve ser representado"""
+class StepBase(BaseModel):
+    name: str
+    description: Optional[str] = None
 
-    recipe_id: int = 1
-    title: str = "Misture tudo"
-    description: str = "Misture todos os ingredientes"
-
-
-class StepUpdateSchema(BaseModel):
-    """Define como um passo atualizado deve ser representado"""
-
-    title: str = "Misture tudo"
-    description: str = "Misture todos os ingredientes"
+    prev_step: Optional[int] = None
+    next_step: Optional[int] = None
 
 
-class StepDeleteSchema(BaseModel):
-    """Define como um passo deletado deve ser representado"""
+class StepCreate(StepBase):
+    pass
 
-    message: str
-    title: str
+
+class Step(StepBase):
+    id: int
+    recipe_id: int
+
+    class Config:
+        orm_mode = True
