@@ -9,7 +9,7 @@ class Recipe(Base):
 
     __tablename__ = "recipes"
 
-    id = Column("pk_recipe", Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     title = Column(String(250), nullable=False)
     description = Column(String(255), nullable=True)
 

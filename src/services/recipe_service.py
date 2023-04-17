@@ -77,9 +77,23 @@ def recipe_delete(recipe_id: int):
 
     try:
         with DBConnectionHandler() as db_connection:
-            db_connection.session.query(Recipe).filter_by(id=recipe_id).delete()
+            recipe = db_connection.session.query(Recipe).filter_by(id=recipe_id).first()
+
+            ingredients = recipe.ingredients
+            steps = recipe.steps
+
+            if ingredients:
+                for ingredient in ingredients:
+                    db_connection.session.delete(ingredient)
+
+            if steps:
+                for step in steps:
+                    db_connection.session.delete(step)
+
+            db_connection.session.delete(recipe)
             db_connection.session.commit()
             return True
+
     except Exception as e:
         db_connection.session.rollback()
         raise e

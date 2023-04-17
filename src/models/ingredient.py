@@ -13,4 +13,4 @@ class Ingredient(Base):
     quantity = Column(String(50), nullable=False)
 
     # Definição do relacionamento entre Ingredient e Recipe
-    recipe_id = Column(Integer, ForeignKey("recipes.pk_recipe"), nullable=False)
+    recipe_id = Column(Integer, ForeignKey("recipes.id"), nullable=False)

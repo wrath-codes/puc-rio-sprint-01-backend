@@ -17,4 +17,4 @@ class Step(Base):
     next_step = Column(Integer, ForeignKey("steps.id"), nullable=True)
 
     # Definição do relacionamento entre Step e Recipe
-    recipe_id = Column(Integer, ForeignKey("recipes.pk_recipe"), nullable=False)
+    recipe_id = Column(Integer, ForeignKey("recipes.id"), nullable=False)

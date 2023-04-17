@@ -4,20 +4,24 @@ from pydantic import BaseModel
 
 
 class StepBase(BaseModel):
-    name: str
+    title: str
     description: Optional[str] = None
-
-    prev_step: Optional[int] = None
-    next_step: Optional[int] = None
 
 
 class StepCreate(StepBase):
     pass
 
 
+class StepUpdate(StepBase):
+    pass
+
+
 class Step(StepBase):
     id: int
     recipe_id: int
+
+    prev_step: Optional[int] = None
+    next_step: Optional[int] = None
 
     class Config:
         orm_mode = True
