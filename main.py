@@ -45,10 +45,11 @@ app.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # Include router
-app.include_router(main_router)
+app.include_router(main_router, prefix="/api")
 
 
 @app.get("/", tags=["Docs"])

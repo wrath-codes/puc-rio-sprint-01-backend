@@ -23,7 +23,7 @@ def recipe_get_all():
 
     try:
         with DBConnectionHandler() as db_connection:
-            recipes = db_connection.session.query(Recipe).all()
+            recipes = db_connection.session.query(Recipe).order_by(Recipe.title).all()
             return recipes
     except Exception as e:
         db_connection.session.rollback()
@@ -109,6 +109,7 @@ def recipe_search(search: str):
             recipes = (
                 db_connection.session.query(Recipe)
                 .filter(Recipe.title.ilike(f"%{search}%"))
+                .order_by(Recipe.title)
                 .all()
             )
             return recipes
