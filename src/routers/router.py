@@ -82,7 +82,7 @@ def search_recipe(title: str):
 
 @main_router.post(
     "/{recipe_id}/ingredients",
-    response_model=Recipe,
+    response_model=Ingredient,
     status_code=201,
     tags=["Ingredients"],
 )
