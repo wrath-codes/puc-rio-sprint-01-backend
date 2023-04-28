@@ -21,53 +21,53 @@ def step_create(step: StepCreate, recipe_id: int):
 
             # Se não existir nenhum passo, cria o primeiro passo
             if not steps:
-                step = Step(
+                new_step = Step(
                     title=step.title,
                     description=step.description,
                     recipe_id=recipe_id,
                 )
-                db_connection.session.add(step)
+                db_connection.session.add(new_step)
                 db_connection.session.commit()
-                db_connection.session.refresh(step)
-                return step
+                db_connection.session.refresh(new_step)
+                return new_step
 
             # Se existir apenas um passo, cria o segundo passo
             elif len(steps) == 1:
-                step = Step(
+                new_step = Step(
                     title=step.title,
                     description=step.description,
                     recipe_id=recipe_id,
                     prev_step=steps[0].id,
                 )
-                db_connection.session.add(step)
+                db_connection.session.add(new_step)
                 first_step = steps[0]
                 db_connection.session.refresh(first_step)
-                first_step.next_step = step.id
+                first_step.next_step = new_step.id
                 db_connection.session.commit()
-                db_connection.session.refresh(step)
-                return step
+                db_connection.session.refresh(new_step)
+                return new_step
 
             # Se existir mais de um passo, cria o próximo passo
             else:
                 last_step = None
-                for step in steps:
-                    if step.next_step is None:
-                        last_step = step
+                for s in steps:
+                    if s.next_step is None:
+                        last_step = s
                         break
 
-                step = Step(
+                new_step = Step(
                     title=step.title,
                     description=step.description,
                     recipe_id=recipe_id,
                     prev_step=last_step.id,
                 )
 
-                db_connection.session.add(step)
+                db_connection.session.add(new_step)
                 db_connection.session.refresh(last_step)
-                last_step.next_step = step.id
+                last_step.next_step = new_step.id
                 db_connection.session.commit()
-                db_connection.session.refresh(step)
-                return step
+                db_connection.session.refresh(new_step)
+                return new_step
 
     except Exception as e:
         db_connection.session.rollback()

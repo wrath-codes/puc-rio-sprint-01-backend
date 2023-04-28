@@ -48,7 +48,10 @@ def create_recipe(recipe: RecipeCreate):
 @main_router.get("/", response_model=List[Recipe], tags=["Recipes"])
 def get_recipes():
     """Get all recipes"""
-    return recipe_get_all()
+    recipes = recipe_get_all()
+    if not recipes:
+        return []
+    return recipes
 
 
 @main_router.get("/{recipe_id}", response_model=Recipe, tags=["Recipes"])
@@ -77,7 +80,10 @@ def delete_recipe(recipe_id: int):
 @main_router.get("/search/{title}", response_model=List[Recipe], tags=["Recipes"])
 def search_recipe(title: str):
     """Search a recipe by title or contains in title"""
-    return recipe_search(title)
+    search_result = recipe_search(title)
+    if not search_result:
+        return []
+    return search_result
 
 
 @main_router.post(
@@ -96,7 +102,10 @@ def add_ingredient(ingredient: IngredientCreate, recipe_id: int):
 )
 def get_ingredients(recipe_id: int):
     """Get all ingredients from a recipe"""
-    return ingredient_get_by_recipe(recipe_id)
+    ingredients = ingredient_get_by_recipe(recipe_id)
+    if not ingredients:
+        return []
+    return ingredients
 
 
 @main_router.get(
@@ -119,7 +128,9 @@ def get_ingredient(ingredient_id: int, recipe_id: int):
 )
 def update_ingredient(ingredient_id: int, ingredient: IngredientUpdate, recipe_id: int):
     """Update an ingredient from a recipe"""
-    return ingredient_update(ingredient, ingredient_id, recipe_id)
+    ingredient_update(ingredient, ingredient_id, recipe_id)
+    updated_ingredient = ingredient_get_by_id(ingredient_id, recipe_id)
+    return updated_ingredient
 
 
 @main_router.delete(
@@ -137,7 +148,8 @@ def delete_ingredient(ingredient_id: int, recipe_id: int):
 )
 def add_step(step: StepCreate, recipe_id: int):
     """Add a step to a recipe"""
-    return step_create(step, recipe_id)
+    new_step = step_create(step, recipe_id)
+    return new_step
 
 
 @main_router.delete("/{recipe_id}/steps/{step_id}", status_code=200, tags=["Steps"])
@@ -151,7 +163,9 @@ def delete_step(step_id: int, recipe_id: int):
 @main_router.put("/{recipe_id}/steps/{step_id}", response_model=Step, tags=["Steps"])
 def update_step(step_id: int, step: StepUpdate, recipe_id: int):
     """Update a step from a recipe"""
-    return step_update(step, step_id, recipe_id)
+    step_update(step, step_id, recipe_id)
+    updated_step = step_get_by_id(step_id, recipe_id)
+    return updated_step
 
 
 @main_router.get("/{recipe_id}/steps/{step_id}", response_model=Step, tags=["Steps"])
@@ -166,7 +180,10 @@ def get_step(step_id: int, recipe_id: int):
 @main_router.get("/{recipe_id}/steps", response_model=List[Step], tags=["Steps"])
 def get_steps(recipe_id: int):
     """Get all steps from a recipe in order"""
-    return step_get_all_ordered(recipe_id)
+    steps = step_get_all_ordered(recipe_id)
+    if not steps:
+        return []
+    return steps
 
 
 @main_router.put(
