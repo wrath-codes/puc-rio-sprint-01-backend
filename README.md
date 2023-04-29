@@ -1,7 +1,7 @@
 # Como instalar a Recipes API
 ## Pré-requisitos
-- [Python 3.11.2](https://www.python.org/downloads/release/python-385/)
-- [Pip](https://pip.pypa.io/en/stable/installing/)
+- [Python 3.11.2](https://www.python.org/downloads/release/python-3112/)
+- [Pip3](https://pip.pypa.io/en/stable/installation/)
 - [venv](https://docs.python.org/3/library/venv.html)
 
 ## Como instalar
@@ -26,15 +26,22 @@
         ```
 4. Instale as dependências
     ```bash
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
     
 5. Rode o main.py
     ```bash
-    python main.py
+    python3 main.py
     ```
 6. Acesse a API em http://localhost:8000/
 
+7. Caso queira popular o banco de dados com dados de teste, rode o arquivo seeder.py
+    ```bash
+    python3 seeder.py
+    ```
+    - O arquivo seeder.py cria algumas receitas, ingredientes e passos no banco de dados.
+    
+<br>
 
 ## Descrição do projeto
 - A Recipes API é uma API que permite o cadastro de receitas, ingredientes e passos, além de permitir a busca de receitas por título.
