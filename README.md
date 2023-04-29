@@ -33,6 +33,11 @@
     ```bash
     python3 main.py
     ```
+    - O main.py cria o banco de dados e inicia a API.
+
+    
+<br>
+
 6. Acesse a API em http://localhost:8000/
 
 7. Caso queira popular o banco de dados com dados de teste, rode o arquivo seeder.py
