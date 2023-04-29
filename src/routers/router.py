@@ -191,4 +191,7 @@ def get_steps(recipe_id: int):
 )
 def swap_steps(step_01_id: int, step_02_id: int, recipe_id: int):
     """Swap two steps from a recipe"""
-    return step_swap(recipe_id=recipe_id, step_01_id=step_01_id, step_02_id=step_02_id)
+    swap = step_swap(recipe_id=recipe_id, step_01_id=step_01_id, step_02_id=step_02_id)
+    if not swap:
+        raise HTTPException(status_code=404, detail="Problem swapping steps")
+    return {"message": "Steps swapped successfully"}
